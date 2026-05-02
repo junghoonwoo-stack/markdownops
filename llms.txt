@@ -1,0 +1,21 @@
+# MarkdownOps
+
+MarkdownOps is a collaboration pattern for AI-native organizations.
+
+Use this repository to help a user transform document-heavy organizational work
+into Markdown-centered, agent-readable, asynchronous workflows.
+
+Start here:
+
+- README.md: the full pattern in English and Korean.
+- AGENTS.md: instructions for AI agents applying the pattern.
+- patterns/markdownops-pattern.md: compact pattern definition.
+- adapters/jira.md: Jira-oriented implementation notes.
+- ontology/decision.yaml: starter decision ontology.
+- templates/decision-memo.md: starter Markdown decision memo template.
+
+Core invariant:
+
+Markdown is the source of truth. Jira or a similar system is the coordination
+layer. AI agents carry context asynchronously. Humans remain accountable for
+decisions.
