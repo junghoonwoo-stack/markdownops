@@ -174,12 +174,6 @@ patterns/
 
 adapters/
   jira.md
-
-ontology/
-  decision.yaml
-
-templates/
-  decision-memo.md
 ```
 
 ## 한국어: MarkdownOps
