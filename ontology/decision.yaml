@@ -1,0 +1,53 @@
+version: 0.1.0
+name: markdownops-decision-ontology
+description: Starter ontology for logged organizational decisions.
+
+decision_types:
+  - id: project_go_no_go
+    label: Project go/no-go
+    requires_human_approval: true
+  - id: release_readiness
+    label: Release readiness
+    requires_human_approval: true
+  - id: design_approval
+    label: Design approval
+    requires_human_approval: true
+  - id: spec_approval
+    label: Specification approval
+    requires_human_approval: true
+
+states:
+  - id: draft
+    label: Draft
+  - id: in_agent_review
+    label: In agent review
+  - id: in_human_review
+    label: In human review
+  - id: approved
+    label: Approved
+  - id: rejected
+    label: Rejected
+  - id: blocked
+    label: Blocked
+  - id: escalated
+    label: Escalated
+
+risk_levels:
+  - id: low
+    label: Low
+  - id: medium
+    label: Medium
+  - id: high
+    label: High
+  - id: critical
+    label: Critical
+
+review_decisions:
+  - id: approve
+    label: Approve
+  - id: request_changes
+    label: Request changes
+  - id: block
+    label: Block
+  - id: escalate
+    label: Escalate
