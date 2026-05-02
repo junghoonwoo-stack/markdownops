@@ -11,8 +11,6 @@ Start here:
 - AGENTS.md: instructions for AI agents applying the pattern.
 - patterns/markdownops-pattern.md: compact pattern definition.
 - adapters/jira.md: Jira-oriented implementation notes.
-- ontology/decision.yaml: starter decision ontology.
-- templates/decision-memo.md: starter Markdown decision memo template.
 
 Core invariant:
 
