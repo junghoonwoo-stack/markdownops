@@ -7,7 +7,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ALL_SERVERS=(github gitlab jira linear notion)
+ALL_SERVERS=(github gitlab jira linear notion asana)
 
 if [ "$#" -gt 0 ]; then
   SERVERS=("$@")

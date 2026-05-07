@@ -10,7 +10,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $root = $PSScriptRoot
-$allServers = @("github", "gitlab", "jira", "linear", "notion")
+$allServers = @("github", "gitlab", "jira", "linear", "notion", "asana")
 
 if ($RequestedServers.Count -gt 0) {
     $servers = $RequestedServers

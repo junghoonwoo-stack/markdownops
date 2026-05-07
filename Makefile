@@ -1,7 +1,7 @@
 # MarkdownOps — repo-level Makefile.
 # Iterates the per-connector npm projects under mcp-servers/.
 
-SERVERS := github gitlab jira linear notion
+SERVERS := github gitlab jira linear notion asana
 
 .PHONY: help install build test clean \
 	$(addprefix install-,$(SERVERS)) \

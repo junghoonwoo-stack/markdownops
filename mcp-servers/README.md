@@ -27,8 +27,7 @@ See [../runners/mcp.md](../runners/mcp.md) for the contract details.
 | Jira Cloud | ✅ available | [jira/](jira/) |
 | Linear | ✅ available | [linear/](linear/) |
 | Notion | ✅ available | [notion/](notion/) |
-| Asana | 🚧 planned | `asana/` |
-| Slack (read-only) | 🚧 planned | `slack/` |
+| Asana | ✅ available | [asana/](asana/) |
 
 ## Adding a new connector
 
@@ -93,8 +92,7 @@ MarkdownOps용 협업 레이어 커넥터, Model Context Protocol 서버로 노�
 | Jira Cloud | ✅ 사용 가능 | [jira/](jira/) |
 | Linear | ✅ 사용 가능 | [linear/](linear/) |
 | Notion | ✅ 사용 가능 | [notion/](notion/) |
-| Asana | 🚧 예정 | `asana/` |
-| Slack (읽기 전용) | 🚧 예정 | `slack/` |
+| Asana | ✅ 사용 가능 | [asana/](asana/) |
 
 ## 새 커넥터 추가
 
