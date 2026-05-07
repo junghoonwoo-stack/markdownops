@@ -341,7 +341,9 @@ describe("mdops_link_artifact", () => {
     vi.stubGlobal(
       "fetch",
       makeFetchMock([
+        // resolveIssueId
         { issue: { id: "issue-uuid" } },
+        // commentCreate
         {
           commentCreate: {
             success: true,

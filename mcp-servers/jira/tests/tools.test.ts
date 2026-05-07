@@ -39,7 +39,10 @@ function makeFetchMock(responses: Array<unknown | ((call: FetchCall) => unknown)
     calls.push(call);
     const next = responses[i++];
     const data = typeof next === "function" ? (next as Function)(call) : next;
-    return new Response(data === undefined ? "" : JSON.stringify(data), {
+    if (data === undefined) {
+      return new Response(null, { status: 204 });
+    }
+    return new Response(JSON.stringify(data), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
