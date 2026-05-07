@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MarkdownOps — A collaboration pattern for AI-native organizations</title>
+  <meta name="description" content="Move organizational work from meeting-heavy human-only documents into Markdown-centered, agent-readable workflows. Humans decide; agents carry context." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .lang-section.hidden { display: none; }
+    .step-card:hover { transform: translateY(-2px); transition: transform .15s; }
+    svg text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+
+  <!-- Header -->
+  <header class="sticky top-0 bg-white/85 backdrop-blur border-b z-20">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="#top" class="text-lg font-semibold tracking-tight">MarkdownOps</a>
+      <nav class="flex items-center gap-3 text-sm">
+        <div class="flex items-center text-slate-500 border rounded overflow-hidden">
+          <button id="btn-en" class="px-3 py-1 bg-slate-900 text-white">EN</button>
+          <button id="btn-ko" class="px-3 py-1 hover:bg-slate-50">한</button>
+        </div>
+        <a href="demo/" class="px-3 py-1.5 rounded bg-slate-900 text-white hover:bg-slate-700">
+          <span class="lang-section lang-en">Try the demo →</span>
+          <span class="lang-section lang-ko hidden">데모 보기 →</span>
+        </a>
+        <a href="https://github.com/junghoonwoo-stack/markdownops" target="_blank"
+          class="hidden sm:inline px-3 py-1.5 rounded border hover:bg-slate-50">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <a id="top"></a>
+
+  <!-- HERO -->
+  <section class="max-w-6xl mx-auto px-6 pt-20 pb-16">
+    <div class="lang-section lang-en">
+      <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wide mb-4">
+        A collaboration pattern for AI-native organizations
+      </p>
+      <h1 class="text-5xl sm:text-6xl font-semibold tracking-tight leading-tight mb-6">
+        Markdown is the new<br />
+        <span class="text-emerald-600">organizational source of truth.</span>
+      </h1>
+      <p class="text-lg text-slate-700 max-w-2xl mb-8 leading-relaxed">
+        Software shipped faster because code was already agent-readable. Most non-engineering
+        work is still trapped in slides, meetings, and decks. MarkdownOps moves business
+        artifacts — sales requirements, productization proposals, PRDs, design briefs —
+        into Markdown that AI agents can read, review, and route. Humans show up to decide.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="demo/" class="px-5 py-3 rounded bg-slate-900 text-white font-medium hover:bg-slate-700">
+          Try the live demo
+        </a>
+        <a href="https://github.com/junghoonwoo-stack/markdownops" target="_blank"
+          class="px-5 py-3 rounded border font-medium hover:bg-slate-50">View on GitHub</a>
+      </div>
+    </div>
+    <div class="lang-section lang-ko hidden">
+      <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wide mb-4">
+        AI-native 조직 협업 패턴
+      </p>
+      <h1 class="text-5xl sm:text-6xl font-semibold tracking-tight leading-tight mb-6">
+        Markdown은 조직의<br />
+        <span class="text-emerald-600">새로운 source of truth.</span>
+      </h1>
+      <p class="text-lg text-slate-700 max-w-2xl mb-8 leading-relaxed">
+        소프트웨어 개발은 코드가 본래 agent-readable이어서 빨라졌다. 비개발 업무는 여전히
+        슬라이드·회의·문서에 갇혀 있다. MarkdownOps는 영업요구조건서·상품화 발의서·PRD·
+        디자인 발의서 같은 비즈니스 산출물을 AI agent가 읽고 리뷰하고 라우팅할 수 있는
+        Markdown으로 옮긴다. 사람은 결정하기 위해 등장한다.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="demo/" class="px-5 py-3 rounded bg-slate-900 text-white font-medium hover:bg-slate-700">
+          라이브 데모 보기
+        </a>
+        <a href="https://github.com/junghoonwoo-stack/markdownops" target="_blank"
+          class="px-5 py-3 rounded border font-medium hover:bg-slate-50">GitHub에서 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE BOTTLENECK -->
+  <section class="bg-slate-50 border-y">
+    <div class="max-w-6xl mx-auto px-6 py-20">
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-amber-600 mb-3">
+            <span class="lang-section lang-en">The bottleneck</span>
+            <span class="lang-section lang-ko hidden">병목</span>
+          </p>
+          <h2 class="text-3xl font-semibold tracking-tight mb-4">
+            <span class="lang-section lang-en">The slowest node sets the speed.</span>
+            <span class="lang-section lang-ko hidden">가장 느린 노드가 전체 속도를 정한다.</span>
+          </h2>
+          <p class="text-slate-700 leading-relaxed">
+            <span class="lang-section lang-en">
+              In the AI era, organizational speed isn't limited by developer cognition.
+              It's limited by the loop between business, product, design, and engineering —
+              and that loop runs on documents only humans can read.
+            </span>
+            <span class="lang-section lang-ko hidden">
+              AI 시대 조직의 속도는 개발자 개인의 인지가 아닌, 영업·상품·디자인·엔지니어링
+              사이 상호작용 루프에서 제한된다. 그 루프는 사람만 읽을 수 있는 문서 위에서 돈다.
+            </span>
+          </p>
+          <ul class="mt-6 space-y-2 text-sm text-slate-700">
+            <li class="flex gap-2">
+              <span class="text-amber-600">●</span>
+              <span class="lang-section lang-en">Decisions wait for the next meeting.</span>
+              <span class="lang-section lang-ko hidden">결정은 다음 회의를 기다린다.</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-amber-600">●</span>
+              <span class="lang-section lang-en">Each person rebuilds context from scratch.</span>
+              <span class="lang-section lang-ko hidden">각 사람이 매번 맥락을 처음부터 다시 쌓는다.</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-amber-600">●</span>
+              <span class="lang-section lang-en">Audit trails live in chat threads and slide footers.</span>
+              <span class="lang-section lang-ko hidden">감사 기록은 채팅 스레드와 슬라이드 풋노트에 흩어져 있다.</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-amber-600">●</span>
+              <span class="lang-section lang-en">AI agents can't help — the source isn't theirs to read.</span>
+              <span class="lang-section lang-ko hidden">AI agent는 도울 수 없다 — source가 그들이 읽을 형태가 아니다.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-7">
+          <p class="text-xs font-medium text-slate-500 mb-2">
+            <span class="lang-section lang-en">Today's flow</span>
+            <span class="lang-section lang-ko hidden">현재의 흐름</span>
+          </p>
+          <div class="bg-white border rounded-lg p-6">
+            <svg viewBox="0 0 720 220" class="w-full h-auto">
+              <defs>
+                <marker id="arr-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#d97706" />
+                </marker>
+              </defs>
+              <!-- nodes -->
+              <g font-size="13" fill="#0f172a">
+                <g>
+                  <rect x="10" y="10" width="120" height="44" rx="6" fill="#fff" stroke="#fbbf24" stroke-width="1.5"/>
+                  <text x="70" y="37" text-anchor="middle">Document</text>
+                </g>
+                <g>
+                  <rect x="170" y="10" width="120" height="44" rx="6" fill="#fff" stroke="#fbbf24" stroke-width="1.5"/>
+                  <text x="230" y="37" text-anchor="middle">Meeting</text>
+                </g>
+                <g>
+                  <rect x="330" y="10" width="120" height="44" rx="6" fill="#fff" stroke="#fbbf24" stroke-width="1.5"/>
+                  <text x="390" y="37" text-anchor="middle">Re-explain</text>
+                </g>
+                <g>
+                  <rect x="490" y="10" width="120" height="44" rx="6" fill="#fff" stroke="#fbbf24" stroke-width="1.5"/>
+                  <text x="550" y="37" text-anchor="middle">Discuss</text>
+                </g>
+                <!-- second row -->
+                <g>
+                  <rect x="170" y="166" width="120" height="44" rx="6" fill="#fff" stroke="#fbbf24" stroke-width="1.5"/>
+                  <text x="230" y="193" text-anchor="middle">Decide later</text>
+                </g>
+                <g>
+                  <rect x="330" y="166" width="120" height="44" rx="6" fill="#fff" stroke="#fbbf24" stroke-width="1.5"/>
+                  <text x="390" y="193" text-anchor="middle">Follow-up doc</text>
+                </g>
+              </g>
+              <!-- arrows -->
+              <g stroke="#d97706" stroke-width="2" fill="none">
+                <line x1="130" y1="32" x2="170" y2="32" marker-end="url(#arr-amber)"/>
+                <line x1="290" y1="32" x2="330" y2="32" marker-end="url(#arr-amber)"/>
+                <line x1="450" y1="32" x2="490" y2="32" marker-end="url(#arr-amber)"/>
+                <!-- wrap -->
+                <path d="M 550 54 Q 550 110 230 110 Q 230 130 230 166" marker-end="url(#arr-amber)"/>
+                <line x1="290" y1="188" x2="330" y2="188" marker-end="url(#arr-amber)"/>
+              </g>
+              <!-- labels above arrows -->
+              <g font-size="10" fill="#94a3b8">
+                <text x="150" y="22" text-anchor="middle">handoff</text>
+                <text x="310" y="22" text-anchor="middle">explain</text>
+                <text x="470" y="22" text-anchor="middle">debate</text>
+                <text x="310" y="178" text-anchor="middle">draft</text>
+              </g>
+              <!-- annotation -->
+              <g font-size="11" fill="#b45309" font-style="italic">
+                <text x="510" y="195">⏱  weeks lost in serial steps</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PATTERN -->
+  <section>
+    <div class="max-w-6xl mx-auto px-6 py-20">
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-5">
+          <p class="text-xs font-semibold uppercase tracking-wide text-emerald-600 mb-3">
+            <span class="lang-section lang-en">The pattern</span>
+            <span class="lang-section lang-ko hidden">패턴</span>
+          </p>
+          <h2 class="text-3xl font-semibold tracking-tight mb-4">
+            <span class="lang-section lang-en">Markdown becomes the intermediate representation.</span>
+            <span class="lang-section lang-ko hidden">Markdown을 조직의 중간 표현으로 삼는다.</span>
+          </h2>
+          <p class="text-slate-700 leading-relaxed mb-4">
+            <span class="lang-section lang-en">
+              Every major work artifact gets a Markdown source. People don't write it manually —
+              their AI agent does. The Markdown attaches to a coordination issue. Other people's
+              agents read it in their own context, post structured reviews, and surface diffs and
+              risks. Humans approve, reject, or revise. Decisions log to the same coordination layer.
+            </span>
+            <span class="lang-section lang-ko hidden">
+              모든 중요한 산출물이 Markdown source를 갖는다. 사람이 직접 쓰지 않는다 —
+              그 사람의 AI agent가 쓴다. Markdown은 협업 이슈에 첨부된다. 다른 사람의 agent가
+              자기 맥락에서 읽고 구조화된 리뷰를 남기며, 차이와 리스크를 정리한다. 사람은
+              승인·반려·수정한다. 결정은 같은 협업 레이어에 로그된다.
+            </span>
+          </p>
+          <p class="text-slate-700 leading-relaxed">
+            <span class="lang-section lang-en">
+              Slides, PDFs, and dashboards become <em>generated views</em>, not the source of truth.
+            </span>
+            <span class="lang-section lang-ko hidden">
+              슬라이드·PDF·대시보드는 <em>생성된 뷰</em>가 된다. 더 이상 source of truth가 아니다.
+            </span>
+          </p>
+        </div>
+
+        <div class="lg:col-span-7">
+          <p class="text-xs font-medium text-slate-500 mb-2">
+            <span class="lang-section lang-en">MarkdownOps flow</span>
+            <span class="lang-section lang-ko hidden">MarkdownOps의 흐름</span>
+          </p>
+          <div class="bg-emerald-50/40 border border-emerald-200 rounded-lg p-6">
+            <svg viewBox="0 0 720 260" class="w-full h-auto">
+              <defs>
+                <marker id="arr-em" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#059669"/>
+                </marker>
+              </defs>
+              <!-- Person + Agent on left -->
+              <g font-size="12" fill="#0f172a">
+                <g>
+                  <circle cx="50" cy="50" r="18" fill="#fff" stroke="#64748b"/>
+                  <text x="50" y="54" text-anchor="middle">👤</text>
+                  <text x="50" y="90" text-anchor="middle" font-size="11" fill="#475569">Person</text>
+                </g>
+                <g>
+                  <rect x="20" y="118" width="60" height="32" rx="6" fill="#fff" stroke="#64748b"/>
+                  <text x="50" y="138" text-anchor="middle" font-size="11">Agent A</text>
+                </g>
+
+                <!-- Markdown source -->
+                <g>
+                  <rect x="170" y="100" width="160" height="68" rx="8" fill="#fff" stroke="#059669" stroke-width="2"/>
+                  <text x="250" y="125" text-anchor="middle" font-size="13" font-weight="600">artifact.md</text>
+                  <text x="250" y="148" text-anchor="middle" font-size="10" fill="#059669">source of truth</text>
+                </g>
+
+                <!-- Coordination issue -->
+                <g>
+                  <rect x="400" y="100" width="160" height="68" rx="8" fill="#fff" stroke="#6366f1" stroke-width="2"/>
+                  <text x="480" y="125" text-anchor="middle" font-size="13" font-weight="600">Coordination issue</text>
+                  <text x="480" y="148" text-anchor="middle" font-size="10" fill="#6366f1">Jira · Linear · GH Issues</text>
+                </g>
+
+                <!-- Other agents -->
+                <g>
+                  <rect x="610" y="20" width="90" height="32" rx="6" fill="#fff" stroke="#64748b"/>
+                  <text x="655" y="40" text-anchor="middle" font-size="11">Agent B</text>
+                </g>
+                <g>
+                  <rect x="610" y="62" width="90" height="32" rx="6" fill="#fff" stroke="#64748b"/>
+                  <text x="655" y="82" text-anchor="middle" font-size="11">Agent C</text>
+                </g>
+                <g>
+                  <rect x="610" y="104" width="90" height="32" rx="6" fill="#fff" stroke="#64748b"/>
+                  <text x="655" y="124" text-anchor="middle" font-size="11">Agent D</text>
+                </g>
+
+                <!-- Humans decide -->
+                <g>
+                  <rect x="400" y="200" width="160" height="40" rx="8" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+                  <text x="480" y="225" text-anchor="middle" font-size="13" font-weight="600">Humans decide</text>
+                </g>
+
+                <!-- Generated views -->
+                <g>
+                  <rect x="170" y="200" width="160" height="40" rx="8" fill="#fff" stroke="#94a3b8" stroke-dasharray="4 3"/>
+                  <text x="250" y="225" text-anchor="middle" font-size="12">PDF · PPTX · Dashboard</text>
+                </g>
+              </g>
+
+              <!-- arrows -->
+              <g stroke="#059669" stroke-width="2" fill="none">
+                <line x1="50" y1="68" x2="50" y2="118" marker-end="url(#arr-em)"/>
+                <line x1="80" y1="134" x2="170" y2="134" marker-end="url(#arr-em)"/>
+                <line x1="330" y1="134" x2="400" y2="134" marker-end="url(#arr-em)"/>
+              </g>
+              <g stroke="#94a3b8" stroke-width="1.5" fill="none">
+                <line x1="560" y1="116" x2="610" y2="36" marker-end="url(#arr-em)"/>
+                <line x1="560" y1="134" x2="610" y2="78" marker-end="url(#arr-em)"/>
+                <line x1="560" y1="152" x2="610" y2="120" marker-end="url(#arr-em)"/>
+              </g>
+              <g stroke="#7c3aed" stroke-width="2" fill="none">
+                <line x1="480" y1="168" x2="480" y2="200" marker-end="url(#arr-em)"/>
+              </g>
+              <g stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3" fill="none">
+                <line x1="250" y1="168" x2="250" y2="200" marker-end="url(#arr-em)"/>
+              </g>
+
+              <!-- arrow labels -->
+              <g font-size="10" fill="#475569">
+                <text x="120" y="130" text-anchor="middle">produces</text>
+                <text x="365" y="128" text-anchor="middle">attached</text>
+                <text x="595" y="76" text-anchor="middle">read in parallel</text>
+                <text x="495" y="190" text-anchor="middle">approve / revise / block</text>
+                <text x="262" y="190" text-anchor="start">generated on demand</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE WORKFLOW -->
+  <section class="bg-slate-50 border-y">
+    <div class="max-w-6xl mx-auto px-6 py-20">
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">
+        <span class="lang-section lang-en">Core workflow</span>
+        <span class="lang-section lang-ko hidden">핵심 흐름</span>
+      </p>
+      <h2 class="text-3xl font-semibold tracking-tight mb-10">
+        <span class="lang-section lang-en">Six steps. No meeting.</span>
+        <span class="lang-section lang-ko hidden">6단계. 회의 없음.</span>
+      </h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- 1 -->
+        <div class="step-card bg-white border rounded-lg p-5">
+          <div class="text-emerald-600 font-mono text-xs font-semibold mb-1">STEP 01</div>
+          <h3 class="font-semibold mb-1">
+            <span class="lang-section lang-en">A person works with their agent</span>
+            <span class="lang-section lang-ko hidden">사람이 자기 agent와 함께 작업</span>
+          </h3>
+          <p class="text-sm text-slate-600">
+            <span class="lang-section lang-en">Sales rep, PM, designer — they describe the need; the agent drafts.</span>
+            <span class="lang-section lang-ko hidden">영업·기획·디자이너가 요구를 설명하면 agent가 초안을 만든다.</span>
+          </p>
+        </div>
+        <!-- 2 -->
+        <div class="step-card bg-white border rounded-lg p-5">
+          <div class="text-emerald-600 font-mono text-xs font-semibold mb-1">STEP 02</div>
+          <h3 class="font-semibold mb-1">
+            <span class="lang-section lang-en">The agent produces a Markdown artifact</span>
+            <span class="lang-section lang-ko hidden">agent가 Markdown 산출물을 만든다</span>
+          </h3>
+          <p class="text-sm text-slate-600">
+            <span class="lang-section lang-en">Sales requirements, productization proposal, PRD, design brief — Markdown source.</span>
+            <span class="lang-section lang-ko hidden">영업요구조건서·상품화 발의서·PRD·디자인 발의서 — Markdown source.</span>
+          </p>
+        </div>
+        <!-- 3 -->
+        <div class="step-card bg-white border rounded-lg p-5">
+          <div class="text-emerald-600 font-mono text-xs font-semibold mb-1">STEP 03</div>
+          <h3 class="font-semibold mb-1">
+            <span class="lang-section lang-en">It attaches to a coordination issue</span>
+            <span class="lang-section lang-ko hidden">협업 이슈에 첨부된다</span>
+          </h3>
+          <p class="text-sm text-slate-600">
+            <span class="lang-section lang-en">Jira, Linear, GitHub Issues, Asana — wherever decisions are already logged.</span>
+            <span class="lang-section lang-ko hidden">Jira·Linear·GitHub Issues·Asana — 이미 결정이 로그되는 곳 어디든.</span>
+          </p>
+        </div>
+        <!-- 4 -->
+        <div class="step-card bg-white border rounded-lg p-5">
+          <div class="text-emerald-600 font-mono text-xs font-semibold mb-1">STEP 04</div>
+          <h3 class="font-semibold mb-1">
+            <span class="lang-section lang-en">Stakeholder agents review in parallel</span>
+            <span class="lang-section lang-ko hidden">이해관계자의 agent들이 병렬 리뷰</span>
+          </h3>
+          <p class="text-sm text-slate-600">
+            <span class="lang-section lang-en">Each agent reads the artifact in its principal's context and posts a structured review.</span>
+            <span class="lang-section lang-ko hidden">각 agent가 자기 사람의 맥락에서 산출물을 읽고 구조화된 리뷰를 남긴다.</span>
+          </p>
+        </div>
+        <!-- 5 -->
+        <div class="step-card bg-white border rounded-lg p-5">
+          <div class="text-emerald-600 font-mono text-xs font-semibold mb-1">STEP 05</div>
+          <h3 class="font-semibold mb-1">
+            <span class="lang-section lang-en">Humans decide</span>
+            <span class="lang-section lang-ko hidden">사람이 결정한다</span>
+          </h3>
+          <p class="text-sm text-slate-600">
+            <span class="lang-section lang-en">Approve, request changes, block, or escalate. Decisions log to the same thread.</span>
+            <span class="lang-section lang-ko hidden">승인·변경요청·보류·에스컬레이션. 결정은 같은 스레드에 로그.</span>
+          </p>
+        </div>
+        <!-- 6 -->
+        <div class="step-card bg-white border rounded-lg p-5">
+          <div class="text-emerald-600 font-mono text-xs font-semibold mb-1">STEP 06</div>
+          <h3 class="font-semibold mb-1">
+            <span class="lang-section lang-en">Views are generated on demand</span>
+            <span class="lang-section lang-ko hidden">필요할 때 뷰를 생성한다</span>
+          </h3>
+          <p class="text-sm text-slate-600">
+            <span class="lang-section lang-en">PDF, PPTX, dashboards — output, never the source. Always re-generate from Markdown.</span>
+            <span class="lang-section lang-ko hidden">PDF·PPTX·대시보드는 출력일 뿐 source가 아니다. 항상 Markdown에서 재생성.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY CONCEPTS -->
+  <section>
+    <div class="max-w-6xl mx-auto px-6 py-20">
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">
+        <span class="lang-section lang-en">Key concepts</span>
+        <span class="lang-section lang-ko hidden">핵심 개념</span>
+      </p>
+      <h2 class="text-3xl font-semibold tracking-tight mb-10">
+        <span class="lang-section lang-en">Five invariants. Adapt the rest to your stack.</span>
+        <span class="lang-section lang-ko hidden">다섯 개의 불변. 나머지는 조직 스택에 맞게.</span>
+      </h2>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="border rounded-lg p-5">
+          <h3 class="font-semibold mb-2 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            <span class="lang-section lang-en">Markdown as source of truth</span>
+            <span class="lang-section lang-ko hidden">Markdown이 source of truth</span>
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            <span class="lang-section lang-en">Slides, PDFs, dashboards are derived from the Markdown — not the other way around.</span>
+            <span class="lang-section lang-ko hidden">슬라이드·PDF·대시보드는 Markdown에서 파생된다. 반대가 아니다.</span>
+          </p>
+        </div>
+        <div class="border rounded-lg p-5">
+          <h3 class="font-semibold mb-2 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            <span class="lang-section lang-en">Coordination layer</span>
+            <span class="lang-section lang-ko hidden">협업 레이어</span>
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            <span class="lang-section lang-en">Jira, Linear, GitHub Issues, Asana — anywhere with status, ownership, and history.</span>
+            <span class="lang-section lang-ko hidden">상태·오너십·히스토리가 있는 곳이라면 무엇이든 가능. Jira·Linear·GitHub Issues·Asana.</span>
+          </p>
+        </div>
+        <div class="border rounded-lg p-5">
+          <h3 class="font-semibold mb-2 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            <span class="lang-section lang-en">Markdown ontology</span>
+            <span class="lang-section lang-ko hidden">Markdown 온톨로지</span>
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            <span class="lang-section lang-en">Statuses, decision types, roles — defined as Markdown, version-controlled in Git.</span>
+            <span class="lang-section lang-ko hidden">상태·의사결정 유형·역할을 Markdown으로 정의하고 Git으로 관리한다.</span>
+          </p>
+        </div>
+        <div class="border rounded-lg p-5">
+          <h3 class="font-semibold mb-2 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span>
+            <span class="lang-section lang-en">Human-in-the-loop</span>
+            <span class="lang-section lang-ko hidden">Human-in-the-loop</span>
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            <span class="lang-section lang-en">Agents prepare, summarize, recommend. Humans always own decisions.</span>
+            <span class="lang-section lang-ko hidden">agent는 준비·요약·추천한다. 의사결정은 언제나 사람이 가진다.</span>
+          </p>
+        </div>
+        <div class="border rounded-lg p-5 md:col-span-2">
+          <h3 class="font-semibold mb-2 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+            <span class="lang-section lang-en">Async by default</span>
+            <span class="lang-section lang-ko hidden">기본은 비동기</span>
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            <span class="lang-section lang-en">Meetings become optional — reserved for judgment, negotiation, escalation.
+              Context transfer happens through the Markdown and the agents that read it.</span>
+            <span class="lang-section lang-ko hidden">회의는 선택이 된다. 판단·협상·에스컬레이션을 위해서만 남긴다.
+              맥락 전달은 Markdown과 그것을 읽는 agent들을 통해 이루어진다.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA TO DEMO -->
+  <section class="bg-slate-900 text-white">
+    <div class="max-w-6xl mx-auto px-6 py-20 text-center">
+      <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
+        <span class="lang-section lang-en">See it run in your browser.</span>
+        <span class="lang-section lang-ko hidden">브라우저에서 직접 돌려보세요.</span>
+      </h2>
+      <p class="text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+        <span class="lang-section lang-en">
+          Six clickable steps that walk a real scenario — sales requirements through
+          coordination, parallel agent reviews, human decisions, and three downstream
+          artifacts. Recorded mode works without an API key. Live mode calls Anthropic
+          with a key you paste in (memory-only).
+        </span>
+        <span class="lang-section lang-ko hidden">
+          실제 시나리오를 6단계로 클릭하며 따라갑니다 — 영업요구조건서에서 시작해
+          협업 라우팅, 병렬 agent 리뷰, 사람의 의사결정, 3개의 하류 산출물까지.
+          녹화 모드는 API key 없이 동작. 라이브 모드는 입력한 Anthropic key로 실 호출
+          (메모리에만 저장).
+        </span>
+      </p>
+      <a href="demo/" class="inline-block px-6 py-3 rounded bg-white text-slate-900 font-medium hover:bg-slate-100">
+        <span class="lang-section lang-en">Open the demo →</span>
+        <span class="lang-section lang-ko hidden">데모 열기 →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- READ MORE -->
+  <section class="border-t">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <h2 class="text-xl font-semibold mb-6">
+        <span class="lang-section lang-en">Read more</span>
+        <span class="lang-section lang-ko hidden">더 읽기</span>
+      </h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+        <a href="https://github.com/junghoonwoo-stack/markdownops/blob/main/README.md"
+          class="block border rounded-lg p-4 hover:bg-slate-50">
+          <div class="font-medium mb-1">README.md</div>
+          <div class="text-slate-500">
+            <span class="lang-section lang-en">Full pattern, EN + KR.</span>
+            <span class="lang-section lang-ko hidden">전체 패턴 (영문+한국어).</span>
+          </div>
+        </a>
+        <a href="https://github.com/junghoonwoo-stack/markdownops/blob/main/AGENTS.md"
+          class="block border rounded-lg p-4 hover:bg-slate-50">
+          <div class="font-medium mb-1">AGENTS.md</div>
+          <div class="text-slate-500">
+            <span class="lang-section lang-en">Instructions for agents applying the pattern.</span>
+            <span class="lang-section lang-ko hidden">패턴을 적용하는 agent를 위한 지침.</span>
+          </div>
+        </a>
+        <a href="https://github.com/junghoonwoo-stack/markdownops/blob/main/patterns/markdownops-pattern.md"
+          class="block border rounded-lg p-4 hover:bg-slate-50">
+          <div class="font-medium mb-1">patterns/markdownops-pattern.md</div>
+          <div class="text-slate-500">
+            <span class="lang-section lang-en">Compact pattern definition.</span>
+            <span class="lang-section lang-ko hidden">압축된 패턴 정의.</span>
+          </div>
+        </a>
+        <a href="https://github.com/junghoonwoo-stack/markdownops/blob/main/adapters/jira.md"
+          class="block border rounded-lg p-4 hover:bg-slate-50">
+          <div class="font-medium mb-1">adapters/jira.md</div>
+          <div class="text-slate-500">
+            <span class="lang-section lang-en">Jira-oriented implementation notes.</span>
+            <span class="lang-section lang-ko hidden">Jira 적용을 위한 구현 노트.</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t">
+    <div class="max-w-6xl mx-auto px-6 py-8 text-xs text-slate-500 flex justify-between flex-wrap gap-3">
+      <span>MarkdownOps · An open collaboration pattern.</span>
+      <span>
+        <a href="https://github.com/junghoonwoo-stack/markdownops" class="underline">Source on GitHub</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    const setLang = (lang) => {
+      document.querySelectorAll(".lang-section").forEach((el) => {
+        const isMatch = el.classList.contains("lang-" + lang);
+        el.classList.toggle("hidden", !isMatch);
+      });
+      document.getElementById("btn-en").className =
+        "px-3 py-1 " + (lang === "en" ? "bg-slate-900 text-white" : "hover:bg-slate-50");
+      document.getElementById("btn-ko").className =
+        "px-3 py-1 " + (lang === "ko" ? "bg-slate-900 text-white" : "hover:bg-slate-50");
+      document.documentElement.lang = lang === "ko" ? "ko" : "en";
+      try { localStorage.setItem("mdops-landing-lang", lang); } catch {}
+    };
+    document.getElementById("btn-en").addEventListener("click", () => setLang("en"));
+    document.getElementById("btn-ko").addEventListener("click", () => setLang("ko"));
+    try {
+      const saved = localStorage.getItem("mdops-landing-lang");
+      if (saved === "ko") setLang("ko");
+    } catch {}
+  </script>
+</body>
+</html>
