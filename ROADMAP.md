@@ -22,31 +22,35 @@ a usable subset.
 
 ## Shipped
 
+> **Status as of 2026-05-07** — every row below is on `main` and verified by
+> the CI matrix. Last commit on the development environment that produced
+> phases 1A–2P: [`94298ab`](https://github.com/junghoonwoo-stack/markdownops/commit/94298ab).
+
 ### Phase 1 — Foundations
 
-| Phase | What landed |
-|---|---|
-| 1A | `agents/` — six LLM-agnostic system prompts (sales / product / engineering / design / legal / executive). |
-| 1B | `templates/` — six artifact templates with frozen section names so reviewer agents can match. |
-| 1C | `runners/` — seven runtime guides (Claude Code, Codex, Gemini CLI, Cursor, Continue, raw API, MCP). |
-| 1D | `mcp-servers/github/` — first MCP server. Octokit + Vitest + matrix-ready CI. |
+| Status | Phase | What landed |
+|---|---|---|
+| ✅ | 1A | `agents/` — six LLM-agnostic system prompts (sales / product / engineering / design / legal / executive). |
+| ✅ | 1B | `templates/` — six artifact templates with frozen section names so reviewer agents can match. |
+| ✅ | 1C | `runners/` — seven runtime guides (Claude Code, Codex, Gemini CLI, Cursor, Continue, raw API, MCP). |
+| ✅ | 1D | `mcp-servers/github/` — first MCP server. Octokit + Vitest + matrix-ready CI. |
 
 ### Phase 2 — Generalization
 
-| Phase | What landed |
-|---|---|
-| 2E | `mcp-servers/gitlab/` — same `mdops_*` family, GitLab REST. CI matrix expanded. |
-| 2F | `mcp-servers/jira/` — Jira Cloud REST v2. Status as labels; assignee + watchers split. |
-| 2G | `mcp-servers/linear/` — GraphQL backend. Lazy team / label / user resolution; auto-create labels. |
-| 2H | `mcp-servers/notion/` — Notion DB as coordination. Markdown ↔ block converter. |
-| 2I | `Makefile`, `install.sh`, `install.ps1` — one-command install across every server. |
-| 2J | `evals/` — deterministic structural checks plus an opt-in LLM-as-judge stage. CI runs the deterministic side. |
-| 2K | `ontology/` — defaults plus three org-shape examples (saas-startup, enterprise-bank, design-agency). |
-| 2L | `mcp-servers/asana/` — Asana REST. Tag-based status; assignee + followers. (Slack was dropped — does not fit the standard tool family.) |
-| 2M | Demo scenario switcher — picks between the original ACME bank scenario and a new Halo SaaS self-serve billing scenario. |
-| 2N | Root README refresh — explicit "what you get when you clone this" section, install/eval commands surfaced, repository map updated. |
-| 2O | Eval fixtures expanded — good/bad pair for every artifact spec (sales-requirements / productization-proposal / software-prd / design-brief). |
-| 2P | This file. |
+| Status | Phase | What landed |
+|---|---|---|
+| ✅ | 2E | `mcp-servers/gitlab/` — same `mdops_*` family, GitLab REST. CI matrix expanded. |
+| ✅ | 2F | `mcp-servers/jira/` — Jira Cloud REST v2. Status as labels; assignee + watchers split. |
+| ✅ | 2G | `mcp-servers/linear/` — GraphQL backend. Lazy team / label / user resolution; auto-create labels. |
+| ✅ | 2H | `mcp-servers/notion/` — Notion DB as coordination. Markdown ↔ block converter. |
+| ✅ | 2I | `Makefile`, `install.sh`, `install.ps1` — one-command install across every server. |
+| ✅ | 2J | `evals/` — deterministic structural checks plus an opt-in LLM-as-judge stage. CI runs the deterministic side. |
+| ✅ | 2K | `ontology/` — defaults plus three org-shape examples (saas-startup, enterprise-bank, design-agency). |
+| ✅ | 2L | `mcp-servers/asana/` — Asana REST. Tag-based status; assignee + followers. (Slack was dropped — does not fit the standard tool family.) |
+| ✅ | 2M | Demo scenario switcher — picks between the original ACME bank scenario and a new Halo SaaS self-serve billing scenario. |
+| ✅ | 2N | Root README refresh — explicit "what you get when you clone this" section, install/eval commands surfaced, repository map updated. |
+| ✅ | 2O | Eval fixtures expanded — good/bad pair for every artifact spec (sales-requirements / productization-proposal / software-prd / design-brief). |
+| ✅ | 2P | This file. |
 
 ## Next
 
@@ -134,31 +138,35 @@ MarkdownOps가 무엇을 출시했고, 다음에 무엇을 만들고, 도입자/
 
 ## 출시
 
+> **2026-05-07 기준** — 아래 모든 항목은 `main`에 반영되어 있고 CI 매트릭스로
+> 검증됨. phase 1A–2P를 만든 개발 환경의 마지막 commit:
+> [`94298ab`](https://github.com/junghoonwoo-stack/markdownops/commit/94298ab).
+
 ### Phase 1 — 기초
 
-| Phase | 내용 |
-|---|---|
-| 1A | `agents/` — 6개 LLM-agnostic 시스템 프롬프트 (영업/상품/엔지니어링/디자인/법무/경영진). |
-| 1B | `templates/` — 6개 산출물 템플릿. 리뷰어 agent가 매칭할 수 있도록 섹션명 고정. |
-| 1C | `runners/` — 7개 runtime 가이드 (Claude Code, Codex, Gemini CLI, Cursor, Continue, raw API, MCP). |
-| 1D | `mcp-servers/github/` — 첫 MCP 서버. Octokit + Vitest + 매트릭스-ready CI. |
+| 상태 | Phase | 내용 |
+|---|---|---|
+| ✅ | 1A | `agents/` — 6개 LLM-agnostic 시스템 프롬프트 (영업/상품/엔지니어링/디자인/법무/경영진). |
+| ✅ | 1B | `templates/` — 6개 산출물 템플릿. 리뷰어 agent가 매칭할 수 있도록 섹션명 고정. |
+| ✅ | 1C | `runners/` — 7개 runtime 가이드 (Claude Code, Codex, Gemini CLI, Cursor, Continue, raw API, MCP). |
+| ✅ | 1D | `mcp-servers/github/` — 첫 MCP 서버. Octokit + Vitest + 매트릭스-ready CI. |
 
 ### Phase 2 — 일반화
 
-| Phase | 내용 |
-|---|---|
-| 2E | `mcp-servers/gitlab/` — 동일 `mdops_*` 도구군, GitLab REST. CI 매트릭스 확장. |
-| 2F | `mcp-servers/jira/` — Jira Cloud REST v2. 라벨로 상태 표현; assignee + watchers 분리. |
-| 2G | `mcp-servers/linear/` — GraphQL 백엔드. team/label/user 지연 해석; 라벨 자동 생성. |
-| 2H | `mcp-servers/notion/` — Notion DB를 coordination으로. Markdown ↔ 블록 변환기. |
-| 2I | `Makefile`, `install.sh`, `install.ps1` — 모든 서버에 대한 단일 명령 설치. |
-| 2J | `evals/` — 결정적 구조 검사 + 옵트인 LLM-as-judge. CI는 결정적 부분 실행. |
-| 2K | `ontology/` — 기본 + 조직 형태 예시 3개 (saas-startup, enterprise-bank, design-agency). |
-| 2L | `mcp-servers/asana/` — Asana REST. 태그 기반 상태; assignee + followers. (Slack은 표준 도구군에 안 맞아 제외.) |
-| 2M | 데모 시나리오 스위처 — 기존 ACME 은행 시나리오와 새 Halo SaaS 셀프서브 빌링 시나리오 사이 전환. |
-| 2N | 루트 README 갱신 — 명시적 "클론 시 받는 자산" 섹션, install/eval 명령 노출, 리포 맵 갱신. |
-| 2O | eval 픽스처 확장 — 모든 spec(sales-requirements/productization-proposal/software-prd/design-brief)에 대한 good/bad 쌍. |
-| 2P | 이 파일. |
+| 상태 | Phase | 내용 |
+|---|---|---|
+| ✅ | 2E | `mcp-servers/gitlab/` — 동일 `mdops_*` 도구군, GitLab REST. CI 매트릭스 확장. |
+| ✅ | 2F | `mcp-servers/jira/` — Jira Cloud REST v2. 라벨로 상태 표현; assignee + watchers 분리. |
+| ✅ | 2G | `mcp-servers/linear/` — GraphQL 백엔드. team/label/user 지연 해석; 라벨 자동 생성. |
+| ✅ | 2H | `mcp-servers/notion/` — Notion DB를 coordination으로. Markdown ↔ 블록 변환기. |
+| ✅ | 2I | `Makefile`, `install.sh`, `install.ps1` — 모든 서버에 대한 단일 명령 설치. |
+| ✅ | 2J | `evals/` — 결정적 구조 검사 + 옵트인 LLM-as-judge. CI는 결정적 부분 실행. |
+| ✅ | 2K | `ontology/` — 기본 + 조직 형태 예시 3개 (saas-startup, enterprise-bank, design-agency). |
+| ✅ | 2L | `mcp-servers/asana/` — Asana REST. 태그 기반 상태; assignee + followers. (Slack은 표준 도구군에 안 맞아 제외.) |
+| ✅ | 2M | 데모 시나리오 스위처 — 기존 ACME 은행 시나리오와 새 Halo SaaS 셀프서브 빌링 시나리오 사이 전환. |
+| ✅ | 2N | 루트 README 갱신 — 명시적 "클론 시 받는 자산" 섹션, install/eval 명령 노출, 리포 맵 갱신. |
+| ✅ | 2O | eval 픽스처 확장 — 모든 spec(sales-requirements/productization-proposal/software-prd/design-brief)에 대한 good/bad 쌍. |
+| ✅ | 2P | 이 파일. |
 
 ## 다음
 
