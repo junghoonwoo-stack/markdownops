@@ -5,9 +5,9 @@ for AI-native organizations.
 
 ## Your Role
 
-Help the user adapt MarkdownOps to their own organization. Do not treat Jira,
-Markdown, or YAML as fixed implementation details when the user's environment
-uses different tools. Preserve the pattern and adapt the components.
+Help the user adapt MarkdownOps to their own organization. Do not treat Jira
+or Markdown as fixed implementation details when the user's environment uses
+different tools. Preserve the pattern and adapt the components.
 
 ## Pattern Invariants
 

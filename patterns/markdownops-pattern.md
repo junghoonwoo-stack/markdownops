@@ -36,7 +36,7 @@ the loop for decisions.
 2. Attach or sync the Markdown to a Jira issue or equivalent coordination item.
 3. Let each stakeholder's agent read the artifact and produce a local brief.
 4. Capture questions, objections, approvals, and changes as logged comments.
-5. Keep decision states and important terms in YAML ontology files.
+5. Keep decision states and important terms in Markdown ontology files.
 6. Generate slides, PDFs, HTML pages, and dashboards from Markdown when needed.
 
 ## Resulting Context

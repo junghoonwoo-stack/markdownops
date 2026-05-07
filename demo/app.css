@@ -1,0 +1,30 @@
+/* MarkdownOps demo — minimal custom styling on top of Tailwind. */
+
+#rendered-pane h1 { font-size: 1.25rem; font-weight: 600; margin: 0 0 0.5rem; line-height: 1.3; }
+#rendered-pane h2 { font-size: 1rem; font-weight: 600; margin: 1rem 0 0.4rem; line-height: 1.3; }
+#rendered-pane h3 { font-size: 0.9rem; font-weight: 600; margin: 0.8rem 0 0.3rem; }
+#rendered-pane p { margin: 0.4rem 0; line-height: 1.5; font-size: 0.875rem; }
+#rendered-pane ul, #rendered-pane ol { margin: 0.4rem 0; padding-left: 1.25rem; font-size: 0.875rem; }
+#rendered-pane li { margin: 0.15rem 0; line-height: 1.5; }
+#rendered-pane code {
+  background: #f1f5f9; padding: 0.1rem 0.3rem; border-radius: 3px;
+  font-size: 0.8rem; font-family: ui-monospace, SFMono-Regular, monospace;
+}
+#rendered-pane table {
+  border-collapse: collapse; width: 100%; font-size: 0.8125rem; margin: 0.6rem 0;
+}
+#rendered-pane th, #rendered-pane td {
+  border: 1px solid #e2e8f0; padding: 0.35rem 0.6rem; text-align: left;
+}
+#rendered-pane th { background: #f8fafc; font-weight: 600; }
+#rendered-pane strong { font-weight: 600; color: #0f172a; }
+
+#source-pane { font-family: ui-monospace, SFMono-Regular, monospace; }
+
+/* Smooth log entry appearance */
+#log li { animation: fadeIn 0.25s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* Tab buttons */
+.tab-btn { background: transparent; border: 0; cursor: pointer; padding: 0; }
+.tab-btn:hover { color: #0f172a; }

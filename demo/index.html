@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MarkdownOps — Working Demo</title>
+  <meta name="description" content="A click-through, browser-only demo of the MarkdownOps collaboration pattern." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+
+  <header class="border-b bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+      <div class="flex items-baseline gap-3">
+        <span class="text-xl font-semibold tracking-tight">MarkdownOps</span>
+        <span class="text-slate-500 text-sm hidden sm:inline">working demo · 작동 데모</span>
+      </div>
+      <div class="flex items-center gap-2 text-sm">
+        <button id="lang-toggle" class="px-3 py-1 rounded border hover:bg-slate-50">EN / 한</button>
+        <button id="mode-toggle" class="px-3 py-1 rounded border hover:bg-slate-50">Mode: Recorded</button>
+        <button id="reset-btn" class="px-3 py-1 rounded border text-slate-500 hover:bg-slate-50">Reset</button>
+        <a href="https://github.com/junghoonwoo-stack/markdownops" target="_blank"
+          class="px-3 py-1 rounded border hover:bg-slate-50 hidden sm:inline-block">GitHub</a>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 pb-3">
+      <div id="stepper" class="flex items-center gap-1 flex-wrap"></div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Action panel -->
+    <section class="lg:col-span-5 bg-white rounded-lg border p-5">
+      <h2 id="step-title" class="text-lg font-semibold mb-1"></h2>
+      <p id="step-desc" class="text-slate-600 text-sm mb-4 leading-relaxed"></p>
+      <div id="step-action"></div>
+      <div class="mt-6 flex justify-between items-center">
+        <button id="prev-btn" class="px-3 py-1 rounded border text-sm hover:bg-slate-50">← Back</button>
+        <button id="next-btn" class="px-4 py-1.5 rounded bg-slate-900 text-white text-sm hidden">Next →</button>
+      </div>
+    </section>
+
+    <!-- Right column: artifacts + log -->
+    <section class="lg:col-span-7 space-y-6">
+
+      <div class="bg-white rounded-lg border">
+        <div class="border-b px-4 py-2 flex items-center justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-3 text-sm">
+              <button data-tab="rendered" class="tab-btn font-semibold">Rendered</button>
+              <button data-tab="source" class="tab-btn text-slate-500">Source</button>
+            </div>
+            <div id="artifact-switcher" class="flex gap-1 flex-wrap"></div>
+          </div>
+          <span id="artifact-name" class="text-xs text-slate-500 font-mono"></span>
+        </div>
+        <div id="rendered-pane" class="p-5 prose prose-sm max-w-none min-h-[320px]"></div>
+        <pre id="source-pane" class="hidden p-5 text-xs whitespace-pre-wrap min-h-[320px] font-mono leading-relaxed"></pre>
+      </div>
+
+      <div class="bg-white rounded-lg border">
+        <div class="border-b px-4 py-2 text-sm font-semibold flex items-center justify-between">
+          <span>Coordination log · 협업 기록</span>
+          <span class="text-xs text-slate-400 font-normal">issue BANK-1842</span>
+        </div>
+        <ul id="log" class="divide-y"></ul>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="max-w-7xl mx-auto px-6 py-8 text-xs text-slate-400">
+    Pattern: <a href="https://github.com/junghoonwoo-stack/markdownops" class="underline">MarkdownOps</a>.
+    Markdown is the source of truth. The coordination layer logs the flow. Humans decide. AI agents carry context.
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

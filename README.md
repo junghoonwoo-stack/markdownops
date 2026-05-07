@@ -2,6 +2,8 @@
 
 > A collaboration pattern for AI-native organizations.
 
+**Live demo:** https://junghoonwoo-stack.github.io/markdownops/demo/
+
 MarkdownOps is a pattern for moving organizational work from meeting-heavy,
 human-only documents into Markdown-centered, agent-readable workflows.
 
@@ -26,7 +28,7 @@ When applying MarkdownOps:
 5. Use AI agents to review, summarize, translate, and adapt context
    asynchronously.
 6. Keep important concepts, statuses, and decision rules in version-controlled
-   YAML ontology files.
+   Markdown ontology files.
 7. Treat PDF, PPTX, HTML, dashboards, and slides as generated views, not the
    source of truth.
 
@@ -121,7 +123,7 @@ The same pattern can be implemented with Linear, GitHub Issues, Asana, Notion,
 or an internal workflow system, as long as the system provides structured
 records, comments, ownership, status, and auditability.
 
-### YAML Ontology
+### Markdown Ontology
 
 Important business concepts should be explicitly defined.
 
@@ -136,7 +138,10 @@ Examples:
 - ownership
 - escalation rule
 
-These ontology files should be version-controlled in Git.
+These ontology files should be written in Markdown and version-controlled in
+Git. Markdown keeps the ontology consistent with the rest of the source of
+truth, readable by both humans and agents, and parseable with simple heading
+and list conventions.
 
 ### Human-in-the-Loop
 
@@ -174,11 +179,20 @@ patterns/
 
 adapters/
   jira.md
+
+demo/
+  index.html      # browser-only working demo (GitHub Pages)
+  app.js
+  data.js
+  app.css
+  README.md
 ```
 
 ## 한국어: MarkdownOps
 
 > AI-native 조직 협업을 위한 패턴.
+
+**라이브 데모:** https://junghoonwoo-stack.github.io/markdownops/demo/
 
 MarkdownOps는 회의 중심, 사람 전용 문서 중심의 조직 업무를 Markdown
 중심의 AI agent-readable workflow로 바꾸는 협업 패턴이다.
@@ -201,7 +215,7 @@ MarkdownOps를 적용할 때는:
    흐르게 한다.
 4. 의사결정 책임은 사람에게 유지한다.
 5. AI agent가 비동기적으로 리뷰, 요약, 번역, 적용을 돕게 한다.
-6. 중요한 개념, 상태, 의사결정 기준은 YAML ontology로 정의하고 Git으로
+6. 중요한 개념, 상태, 의사결정 기준은 Markdown ontology로 정의하고 Git으로
    관리한다.
 7. PDF, PPTX, HTML, 대시보드는 원본이 아니라 필요할 때 생성되는 표현으로
    다룬다.
