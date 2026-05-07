@@ -5,7 +5,7 @@ import {
   type LinearClient,
 } from "../linear-client.js";
 import { asTextContent, type LinearComment } from "../types.js";
-import { issueRefArg } from "./index.js";
+import { issueRefArg } from "./refs.js";
 
 export const linkArtifactTool: Tool = {
   name: "mdops_link_artifact",

@@ -1,7 +1,7 @@
 import type { Tool } from "@modelcontextprotocol/sdk/types.js";
 import { jiraRequest, type JiraClient } from "../jira-client.js";
 import { asTextContent, type JiraComment } from "../types.js";
-import { issueRefArg } from "./index.js";
+import { issueRefArg } from "./refs.js";
 
 export const addCommentTool: Tool = {
   name: "mdops_add_comment",

@@ -6,7 +6,7 @@ import {
   type LinearClient,
 } from "../linear-client.js";
 import { asTextContent, type LinearIssue } from "../types.js";
-import { issueRefArg } from "./index.js";
+import { issueRefArg } from "./refs.js";
 
 export const assignTool: Tool = {
   name: "mdops_assign",

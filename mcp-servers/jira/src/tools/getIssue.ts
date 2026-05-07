@@ -5,7 +5,7 @@ import {
   asTextContent,
   type JiraIssue,
 } from "../types.js";
-import { issueRefArg } from "./index.js";
+import { issueRefArg } from "./refs.js";
 
 export const getIssueTool: Tool = {
   name: "mdops_get_issue",

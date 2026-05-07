@@ -13,7 +13,7 @@ import {
   type LinearIssue,
   type Status,
 } from "../types.js";
-import { issueRefArg } from "./index.js";
+import { issueRefArg } from "./refs.js";
 
 export const updateStatusTool: Tool = {
   name: "mdops_update_status",
