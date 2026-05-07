@@ -5,6 +5,26 @@
 - **Landing page:** https://junghoonwoo-stack.github.io/markdownops/
 - **Working demo:** https://junghoonwoo-stack.github.io/markdownops/demo/
 
+## What you get when you clone this
+
+```text
+agents/       ← 6 LLM-agnostic system prompts (sales / product / engineering
+              ←   / design / legal / executive)
+templates/    ← 6 artifact templates (sales-req / productization-proposal /
+              ←   PRD / design-brief / decision-memo / meeting-minutes)
+runners/      ← 7 runtime guides (Claude Code / Codex / Gemini CLI / Cursor /
+              ←   Continue / raw API / MCP)
+ontology/     ← decision-states, artifact-types, roles + 3 org-shape examples
+              ←   (saas-startup / enterprise-bank / design-agency)
+mcp-servers/  ← 6 standard mdops_* coordination connectors:
+              ←   github / gitlab / jira / linear / notion / asana
+evals/        ← deterministic structural checks + optional LLM-as-judge
+demo/         ← browser click-through deployed at the demo URL above
+```
+
+Every connector exposes the same 7 `mdops_*` tools, so MarkdownOps agents work
+across any of them without prompt changes.
+
 ## Quick start
 
 ```sh
@@ -14,7 +34,8 @@ cd markdownops
 # or, on Windows PowerShell:
 # .\install.ps1
 # or, with make:
-# make install
+# make install            # all servers
+# make install-github     # one server only
 
 # Pick your runtime and wire one server in:
 #   runners/claude-code.md
@@ -25,9 +46,18 @@ cd markdownops
 #   runners/raw-api.md
 ```
 
-The `agents/`, `templates/`, and `runners/` directories work without any
-install step — they are plain Markdown. The `mcp-servers/` directory is what
-needs `npm install`, and only for the connector(s) you actually use.
+The `agents/`, `templates/`, `runners/`, and `ontology/` directories work
+without any install step — they are plain Markdown. The `mcp-servers/`
+directory is what needs `npm install`, and only for the connector(s) you
+actually use.
+
+To verify an artifact your agent produced matches the structural contract:
+
+```sh
+cd evals
+npm install
+npm run eval -- --spec sales-requirements --file path/to/output.md
+```
 
 MarkdownOps is a pattern for moving organizational work from meeting-heavy,
 human-only documents into Markdown-centered, agent-readable workflows.
@@ -212,14 +242,21 @@ demo/
   app.css
   README.md
 
-agents/           # LLM-agnostic system prompts
-templates/        # artifact templates
-runners/          # how to load agents in each runtime (CC / Codex / Gemini / ...)
-mcp-servers/      # standard mdops_* coordination connectors (GitHub / GitLab / Jira / Linear / Notion)
+agents/           # 6 LLM-agnostic system prompts
+templates/        # 6 artifact templates
+runners/          # 7 runtime guides (CC / Codex / Gemini / Cursor / Continue / raw API / MCP)
+ontology/         # decision-states, artifact-types, roles + examples/ (saas, bank, agency)
+mcp-servers/      # 6 standard mdops_* coordination connectors:
+                  #   github / gitlab / jira / linear / notion / asana
+evals/            # deterministic structural checks + optional LLM-as-judge
 
 Makefile          # make install / build / test / clean across all servers
 install.sh        # bash installer
 install.ps1       # PowerShell installer
+
+.github/
+  workflows/
+    test.yml      # CI: matrix runs every connector + the evals job
 ```
 
 ## 한국어: MarkdownOps
@@ -228,6 +265,23 @@ install.ps1       # PowerShell installer
 
 - **소개 페이지:** https://junghoonwoo-stack.github.io/markdownops/
 - **작동 데모:** https://junghoonwoo-stack.github.io/markdownops/demo/
+
+### 클론 시 받는 자산
+
+```text
+agents/       ← LLM-agnostic 시스템 프롬프트 6종 (영업/상품/엔지니어링/디자인/법무/경영진)
+templates/    ← 산출물 템플릿 6종 (영업요구조건서/상품화 발의서/PRD/디자인 발의서/의사결정 메모/회의록)
+runners/      ← runtime 가이드 7종 (Claude Code / Codex / Gemini CLI / Cursor / Continue / raw API / MCP)
+ontology/     ← 의사결정 상태 / 산출물 종류 / 역할 + 조직 형태 예시 3종
+              ←   (saas-startup / enterprise-bank / design-agency)
+mcp-servers/  ← 표준 mdops_* coordination 커넥터 6종:
+              ←   github / gitlab / jira / linear / notion / asana
+evals/        ← 결정적 구조 검사 + 선택적 LLM-judge
+demo/         ← 위 데모 URL에 배포되는 브라우저 클릭스루
+```
+
+모든 커넥터는 동일한 7개 `mdops_*` 도구를 노출하므로, MarkdownOps agent는 프롬프트
+변경 없이 어떤 커넥터에 대해서도 동작.
 
 ### 빠른 시작
 
@@ -238,7 +292,8 @@ cd markdownops
 # Windows PowerShell:
 # .\install.ps1
 # make 사용 시:
-# make install
+# make install              # 모든 서버
+# make install-github       # 한 서버만
 
 # runtime 선택 후 한 서버를 연결:
 #   runners/claude-code.md
@@ -249,9 +304,17 @@ cd markdownops
 #   runners/raw-api.md
 ```
 
-`agents/`, `templates/`, `runners/` 디렉터리는 install 없이 바로 쓸 수 있다 —
-순수 Markdown이기 때문. `mcp-servers/`만 `npm install`이 필요하며, 실제로 쓸
-커넥터에 대해서만 설치하면 된다.
+`agents/`, `templates/`, `runners/`, `ontology/` 디렉터리는 install 없이 바로
+쓸 수 있다 — 순수 Markdown이기 때문. `mcp-servers/`만 `npm install`이 필요하며,
+실제로 쓸 커넥터에 대해서만 설치하면 된다.
+
+agent가 만든 산출물의 구조 계약을 검증하려면:
+
+```sh
+cd evals
+npm install
+npm run eval -- --spec sales-requirements --file path/to/output.md
+```
 
 MarkdownOps는 회의 중심, 사람 전용 문서 중심의 조직 업무를 Markdown
 중심의 AI agent-readable workflow로 바꾸는 협업 패턴이다.
