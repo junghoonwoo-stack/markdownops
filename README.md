@@ -5,6 +5,30 @@
 - **Landing page:** https://junghoonwoo-stack.github.io/markdownops/
 - **Working demo:** https://junghoonwoo-stack.github.io/markdownops/demo/
 
+## Quick start
+
+```sh
+git clone https://github.com/junghoonwoo-stack/markdownops.git
+cd markdownops
+./install.sh                 # macOS / Linux — builds all MCP servers
+# or, on Windows PowerShell:
+# .\install.ps1
+# or, with make:
+# make install
+
+# Pick your runtime and wire one server in:
+#   runners/claude-code.md
+#   runners/codex.md
+#   runners/gemini-cli.md
+#   runners/cursor.md
+#   runners/continue.md
+#   runners/raw-api.md
+```
+
+The `agents/`, `templates/`, and `runners/` directories work without any
+install step — they are plain Markdown. The `mcp-servers/` directory is what
+needs `npm install`, and only for the connector(s) you actually use.
+
 MarkdownOps is a pattern for moving organizational work from meeting-heavy,
 human-only documents into Markdown-centered, agent-readable workflows.
 
@@ -187,6 +211,15 @@ demo/
   data.js
   app.css
   README.md
+
+agents/           # LLM-agnostic system prompts
+templates/        # artifact templates
+runners/          # how to load agents in each runtime (CC / Codex / Gemini / ...)
+mcp-servers/      # standard mdops_* coordination connectors (GitHub / GitLab / Jira / Linear / Notion)
+
+Makefile          # make install / build / test / clean across all servers
+install.sh        # bash installer
+install.ps1       # PowerShell installer
 ```
 
 ## 한국어: MarkdownOps
@@ -195,6 +228,30 @@ demo/
 
 - **소개 페이지:** https://junghoonwoo-stack.github.io/markdownops/
 - **작동 데모:** https://junghoonwoo-stack.github.io/markdownops/demo/
+
+### 빠른 시작
+
+```sh
+git clone https://github.com/junghoonwoo-stack/markdownops.git
+cd markdownops
+./install.sh                 # macOS / Linux — 모든 MCP 서버 빌드
+# Windows PowerShell:
+# .\install.ps1
+# make 사용 시:
+# make install
+
+# runtime 선택 후 한 서버를 연결:
+#   runners/claude-code.md
+#   runners/codex.md
+#   runners/gemini-cli.md
+#   runners/cursor.md
+#   runners/continue.md
+#   runners/raw-api.md
+```
+
+`agents/`, `templates/`, `runners/` 디렉터리는 install 없이 바로 쓸 수 있다 —
+순수 Markdown이기 때문. `mcp-servers/`만 `npm install`이 필요하며, 실제로 쓸
+커넥터에 대해서만 설치하면 된다.
 
 MarkdownOps는 회의 중심, 사람 전용 문서 중심의 조직 업무를 Markdown
 중심의 AI agent-readable workflow로 바꾸는 협업 패턴이다.
