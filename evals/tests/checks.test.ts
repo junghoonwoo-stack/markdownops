@@ -118,3 +118,30 @@ describe("specs registry", () => {
     }
   });
 });
+
+describe.each([
+  ["productization-proposal"],
+  ["software-prd"],
+  ["design-brief"],
+])("%s good/bad fixtures", (specId) => {
+  it(`${specId}.good.md passes all checks`, async () => {
+    const md = await load(`${specId}.good.md`);
+    const results = runAllChecks(specId, md);
+    const sum = summarize(results);
+    if (!sum.passed) {
+      const failed = results
+        .filter((r) => !r.passed)
+        .map((r) => `${r.name}: ${r.details ?? "<no details>"}`);
+      throw new Error(`${specId}.good.md unexpectedly failed: ${failed.join(" | ")}`);
+    }
+    expect(sum.passed).toBe(true);
+  });
+
+  it(`${specId}.bad.md fails at least one check`, async () => {
+    const md = await load(`${specId}.bad.md`);
+    const results = runAllChecks(specId, md);
+    const sum = summarize(results);
+    expect(sum.passed).toBe(false);
+    expect(sum.passedCount).toBeLessThan(sum.total);
+  });
+});
