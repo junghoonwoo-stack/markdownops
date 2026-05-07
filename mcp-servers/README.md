@@ -23,7 +23,7 @@ See [../runners/mcp.md](../runners/mcp.md) for the contract details.
 | Connector | Status | Path |
 |---|---|---|
 | GitHub Issues | ✅ available | [github/](github/) |
-| GitLab | 🚧 planned | `gitlab/` |
+| GitLab Issues | ✅ available | [gitlab/](gitlab/) |
 | Jira | 🚧 planned | `jira/` |
 | Linear | 🚧 planned | `linear/` |
 | Asana | 🚧 planned | `asana/` |
@@ -89,7 +89,7 @@ MarkdownOps용 협업 레이어 커넥터, Model Context Protocol 서버로 노�
 | 커넥터 | 상태 | 경로 |
 |---|---|---|
 | GitHub Issues | ✅ 사용 가능 | [github/](github/) |
-| GitLab | 🚧 예정 | `gitlab/` |
+| GitLab Issues | ✅ 사용 가능 | [gitlab/](gitlab/) |
 | Jira | 🚧 예정 | `jira/` |
 | Linear | 🚧 예정 | `linear/` |
 | Asana | 🚧 예정 | `asana/` |

@@ -12,12 +12,16 @@ on:
       - ".github/workflows/test.yml"
 
 jobs:
-  github-mcp:
-    name: mcp-servers/github
+  mcp-server:
+    name: mcp-servers/${{ matrix.server }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        server: [github, gitlab]
     defaults:
       run:
-        working-directory: mcp-servers/github
+        working-directory: mcp-servers/${{ matrix.server }}
     steps:
       - uses: actions/checkout@v4
 
