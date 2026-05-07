@@ -1,7 +1,7 @@
 // MarkdownOps demo — scenario and recorded artifacts.
 // All content is bilingual (en / ko). Edit freely; the UI re-reads on reload.
 
-const SCENARIO = {
+let SCENARIO = {
   title: {
     en: "ACME Trade — Cross-Border Instant Card",
     ko: "ACME 트레이드 — 해외 즉시결제 카드",
@@ -27,7 +27,7 @@ const SCENARIO = {
   },
 };
 
-const REVIEWERS = [
+let REVIEWERS = [
   {
     id: "product",
     name: "Park Soo-jin",
@@ -50,7 +50,7 @@ const REVIEWERS = [
   },
 ];
 
-const REVIEWS = {
+let REVIEWS = {
   product: {
     decision: "approve",
     en: {
@@ -151,7 +151,7 @@ const REVIEWS = {
   },
 };
 
-const ARTIFACTS = {
+let ARTIFACTS = {
   "sales-requirements.md": {
     label: { en: "Sales Requirements", ko: "영업요구조건서" },
     role: "sales",
@@ -585,3 +585,468 @@ const AGENT_PROMPTS = {
     "draft a design-brief.md (audience, principles, surfaces, open questions, next). " +
     "Match the input's language. Keep under 50 lines.",
 };
+
+// ----- Scenario switcher -----
+// Each scenario captures the initial title/customer/initialNeed plus its own
+// reviewers, reviews, and artifacts. The current scenario's contents are mirrored
+// onto the legacy SCENARIO/REVIEWERS/REVIEWS/ARTIFACTS globals so the rest of
+// app.js does not need to know about the switcher.
+
+const SCENARIOS = {
+  "acme-bank": {
+    label: { en: "ACME Trade — Cross-Border Card (bank)", ko: "ACME 트레이드 — 해외 결제 카드 (은행)" },
+    title: SCENARIO.title,
+    customer: SCENARIO.customer,
+    initialNeed: SCENARIO.initialNeed,
+    reviewers: REVIEWERS,
+    reviews: REVIEWS,
+    artifacts: ARTIFACTS,
+  },
+  "saas-billing": {
+    label: { en: "Halo SaaS — Self-serve usage billing", ko: "헤일로 SaaS — 셀프서브 사용량 과금" },
+    title: {
+      en: "Halo SaaS — Self-serve usage billing for design teams",
+      ko: "헤일로 SaaS — 디자인 팀 셀프서브 사용량 과금",
+    },
+    customer: {
+      en: "Halo Studio Pro (12,000-seat design SaaS)",
+      ko: "헤일로 스튜디오 프로 (1만2천 시트 디자인 SaaS)",
+    },
+    initialNeed: {
+      en:
+        "Halo's enterprise customers want to expand seats mid-month without filing a sales " +
+        "ticket. Today every seat change is a 3–5 day quote-to-cash loop. Halo's CFO wants a " +
+        "self-serve add-seats flow with usage-based overages, monthly invoicing, and a clear " +
+        "audit trail. Estimated ARR uplift: 8% in the first quarter from removed friction.",
+      ko:
+        "헤일로의 엔터프라이즈 고객은 영업 티켓 없이 월 중간에 시트를 확장하고 싶어한다. 현재는 " +
+        "시트 변경마다 3–5일짜리 quote-to-cash 루프가 발생. CFO는 사용량 기반 초과분, 월 청구, " +
+        "명확한 감사 흔적을 갖춘 셀프서브 시트 추가 흐름을 원한다. 첫 분기 ARR 8% 상승 예상 " +
+        "(마찰 제거에 의한).",
+    },
+    reviewers: [
+      { id: "product", name: "Naomi Lambert", role: { en: "Product", ko: "상품" } },
+      { id: "engineering", name: "Daniel Kim", role: { en: "Engineering", ko: "엔지니어링" } },
+      { id: "design", name: "Sara Vega", role: { en: "Design", ko: "디자인" } },
+      { id: "legal", name: "Park Hye-jin", role: { en: "Finance & Compliance", ko: "재무·컴플라이언스" } },
+    ],
+    reviews: {
+      product: {
+        decision: "approve",
+        en: {
+          summary:
+            "Removes a known friction point. Pricing model lands cleanly on top of our existing meter.",
+          concerns: [
+            "Mid-month proration must mirror existing monthly invoice format.",
+            "Sales team needs a hand-off rule so they do not double-quote on enterprise upgrades.",
+          ],
+          changes: ["None blocking sign-off."],
+        },
+        ko: {
+          summary:
+            "알려진 마찰 지점을 제거. 가격 모델이 기존 미터 위에 깔끔하게 얹힌다.",
+          concerns: [
+            "월 중간 안분은 기존 월 청구 형식과 일치해야 함.",
+            "영업팀이 엔터프라이즈 업그레이드를 이중 견적하지 않도록 핸드오프 규칙 필요.",
+          ],
+          changes: ["승인을 막는 변경 없음."],
+        },
+      },
+      engineering: {
+        decision: "request-changes",
+        en: {
+          summary:
+            "Self-serve seat changes look feasible. The audit-trail requirement needs a real spec.",
+          concerns: [
+            "Idempotency on seat-add: customers will retry on flaky networks.",
+            "Existing invoice generator runs nightly — mid-month overages need a sub-hour replay window.",
+          ],
+          changes: [
+            "Add an audit-trail schema to the PRD with retention >= 7 years.",
+            "Break the invoice generator out of nightly batch to support mid-month overages.",
+          ],
+        },
+        ko: {
+          summary:
+            "셀프서브 시트 변경은 실현 가능. 감사 흔적 요구는 실제 명세가 필요.",
+          concerns: [
+            "시트 추가의 멱등성: 고객은 네트워크 불안정 시 재시도한다.",
+            "기존 청구서 생성기는 야간 배치 — 월 중간 초과분은 1시간 이내 재실행 윈도우 필요.",
+          ],
+          changes: [
+            "PRD에 보존기간 7년 이상의 감사 흔적 스키마 추가.",
+            "청구서 생성기를 야간 배치에서 분리해 월 중간 초과분 지원.",
+          ],
+        },
+      },
+      design: {
+        decision: "approve",
+        en: {
+          summary:
+            "Add-seat flow is two steps; needs to be runnable from the team-admin console without a guided tour.",
+          concerns: [
+            "Confirm-add modal must show the prorated amount up-front, not after submit.",
+            "Failure recovery (declined card mid-flow) is the real UX risk.",
+          ],
+          changes: ["None blocking; design sprint to start 2026-05-19."],
+        },
+        ko: {
+          summary:
+            "시트 추가 흐름은 2단계. 가이드 투어 없이 팀-관리자 콘솔에서 실행 가능해야 한다.",
+          concerns: [
+            "확인 모달은 안분 금액을 제출 후가 아닌 사전에 표시 필수.",
+            "실패 복구(흐름 중간 카드 거절)가 실제 UX 리스크.",
+          ],
+          changes: ["승인을 막는 변경 없음. 디자인 스프린트 2026-05-19 시작."],
+        },
+      },
+      legal: {
+        decision: "request-changes",
+        en: {
+          summary:
+            "Mid-month invoicing crosses a tax-jurisdiction boundary if customers live in multiple states/countries. Need a finance review on this before launch.",
+          concerns: [
+            "Tax handling on prorated lines may differ per jurisdiction.",
+            "Audit trail must be tamper-evident — append-only ledger required.",
+          ],
+          changes: [
+            "Engage tax counsel for jurisdictions with mid-month invoice rules (CA, NY, UK).",
+            "Confirm the audit-trail storage uses an append-only ledger or equivalent.",
+          ],
+        },
+        ko: {
+          summary:
+            "월 중간 청구는 고객이 여러 주/국가에 분포할 경우 세무 관할 경계를 넘는다. 출시 전 재무 리뷰 필요.",
+          concerns: [
+            "안분 라인의 세무 처리는 관할별로 다를 수 있음.",
+            "감사 흔적은 변조 감지 가능 — append-only 원장 필수.",
+          ],
+          changes: [
+            "월 중간 청구 규칙이 있는 관할(CA, NY, UK)에 대해 세무 자문 컨택.",
+            "감사 흔적 저장이 append-only 원장 또는 동등한 방식인지 확인.",
+          ],
+        },
+      },
+    },
+    artifacts: {
+      "sales-requirements.md": {
+        label: { en: "Sales Requirements", ko: "영업요구조건서" },
+        role: "sales",
+        en: `# Sales Requirements — Halo Self-serve Seat Expansion
+
+- **Customer**: Halo Studio Pro (12,000-seat design SaaS)
+- **Owner**: Sales — Maya Chen
+- **Status**: in-review
+- **Generated**: 2026-05-07
+- **Linked issue**: HALO-7421
+
+## Customer context
+
+Halo's enterprise customers expand seats throughout the month. Today every
+change is a sales-assisted quote, taking 3–5 days. The CFO wants a self-serve
+flow with usage-based overages, monthly invoicing, and audit-grade history.
+
+## What the customer asked for
+
+- Self-serve seat add/remove without a sales ticket.
+- Prorated mid-month charges shown before checkout.
+- Monthly invoice that reconciles to seat-change history per team.
+- Tamper-evident audit log of seat changes.
+
+## Sales recommendation
+
+Pursue. Halo is the bellwether for our enterprise design segment; an 8% ARR
+lift is consistent with our internal model. Risk: tax handling and the
+nightly invoice batch.
+
+## Next
+
+Route to Product. Request productization proposal within 3 business days.`,
+        ko: `# 영업요구조건서 — 헤일로 셀프서브 시트 확장
+
+- **고객**: 헤일로 스튜디오 프로 (1만2천 시트 디자인 SaaS)
+- **담당**: 영업 — 마야 챈
+- **상태**: 리뷰중
+- **작성일**: 2026-05-07
+- **연결 이슈**: HALO-7421
+
+## 고객 맥락
+
+헤일로 엔터프라이즈 고객은 월 중에 시트를 확장한다. 현재 모든 변경이 영업 보조
+견적이며 3–5일이 소요. CFO는 사용량 기반 초과분, 월 청구, 감사 가능한 이력을
+갖춘 셀프서브 흐름을 원한다.
+
+## 고객 요구사항
+
+- 영업 티켓 없는 셀프서브 시트 추가/제거.
+- 결제 전 표시되는 월 중간 안분 금액.
+- 팀별 시트 변경 이력과 정합되는 월 청구서.
+- 변조 감지 가능한 시트 변경 감사 로그.
+
+## 영업 권고
+
+진행. 헤일로는 우리 엔터프라이즈 디자인 세그먼트의 선행 지표. 내부 모델 기준
+ARR 8% 상승과 일치. 리스크: 세무 처리, 야간 청구 배치.
+
+## 다음
+
+상품팀으로 라우팅. 영업일 3일 내 상품화 발의서 요청.`,
+      },
+      "productization-proposal.md": {
+        label: { en: "Productization Proposal", ko: "상품화 발의서" },
+        role: "product",
+        en: `# Productization Proposal — Halo Self-serve Seat Expansion
+
+- **Owner**: Product — Naomi Lambert
+- **Anchor customer**: Halo Studio Pro (HALO-7421)
+- **Status**: in-review
+- **Linked**: sales-requirements.md, software-prd.md (draft), design-brief.md (draft)
+
+## Problem
+
+Enterprise SaaS customers grow seat counts faster than the manual quote-to-cash
+loop allows. The 3–5 day delay is the dominant friction point in our renewal
+data, and it concentrates near month-end.
+
+## Proposed product
+
+A self-serve seat-management surface inside the team-admin console with:
+
+- **Add/remove seats**: real-time, with prorated preview.
+- **Mid-month overage**: invoice line generated within 1 hour of change.
+- **Audit trail**: append-only ledger with 7-year retention, exportable CSV.
+
+## Differentiation
+
+| Competitor | Self-serve | Mid-month | Audit ledger |
+|---|---|---|---|
+| LegacyA | partial | nightly | none |
+| **Halo (proposed)** | **full** | **<1h** | **append-only** |
+
+## Pricing model
+
+- Reuse the per-seat list price; overage settles at the same rate.
+- No new SKU required.
+
+## Risks and asks
+
+- **Engineering**: confirm the invoice generator can be split out of the nightly batch.
+- **Finance & Compliance**: tax review for CA, NY, UK mid-month invoice rules.
+- **Design**: cap the add-seat flow at two steps.
+
+## Decision sought
+
+Approve as a Q3 2026 launch initiative.`,
+        ko: `# 상품화 발의서 — 헤일로 셀프서브 시트 확장
+
+- **담당**: 상품 — 나오미 램버트
+- **앵커 고객**: 헤일로 스튜디오 프로 (HALO-7421)
+- **상태**: 리뷰중
+- **연결**: 영업요구조건서, PRD(초안), 디자인 발의서(초안)
+
+## 문제
+
+엔터프라이즈 SaaS 고객은 수동 quote-to-cash 루프가 허용하는 속도보다 빠르게 시트를
+늘린다. 3–5일 지연이 갱신 데이터에서 지배적인 마찰이며 월말에 집중된다.
+
+## 제안 상품
+
+팀-관리자 콘솔에 셀프서브 시트 관리 표면:
+
+- **시트 추가/제거**: 실시간, 안분 미리보기.
+- **월 중간 초과분**: 변경 후 1시간 이내 청구 라인 생성.
+- **감사 흔적**: 7년 보존 append-only 원장, CSV 내보내기.
+
+## 차별화
+
+| 경쟁사 | 셀프서브 | 월 중간 | 감사 원장 |
+|---|---|---|---|
+| LegacyA | 부분 | 야간 | 없음 |
+| **헤일로 (제안)** | **전체** | **<1h** | **append-only** |
+
+## 가격 모델
+
+- 기존 시트당 정가 재사용. 초과분은 동일 단가로 정산.
+- 새 SKU 불필요.
+
+## 리스크와 요청
+
+- **엔지니어링**: 청구서 생성기를 야간 배치에서 분리 가능 여부 확인.
+- **재무·컴플라이언스**: CA·NY·UK 월 중간 청구 규칙에 대한 세무 리뷰.
+- **디자인**: 시트 추가 흐름을 2단계 이내로.
+
+## 요청 의사결정
+
+2026 Q3 런치 이니셔티브로 승인.`,
+      },
+      "software-prd.md": {
+        label: { en: "Software PRD", ko: "소프트웨어 PRD" },
+        role: "engineering",
+        en: `# PRD — Halo Self-serve Seat Expansion
+
+- **Owner**: Engineering — Daniel Kim
+- **Linked**: productization-proposal.md (HALO-7421)
+- **Status**: draft
+
+## Goal
+
+Ship self-serve seat add/remove with prorated mid-month invoicing and an
+append-only audit ledger by 2026-Q3.
+
+## Non-goals
+
+- Self-serve plan tier changes (deferred to v1.1).
+- Multi-currency invoicing (deferred to v1.2).
+
+## Functional scope
+
+1. Seat-management API: idempotent add/remove with retry-safe tokens.
+2. Proration engine: invoice line generation within 1 hour, replayable.
+3. Audit ledger: append-only WORM-style storage, CSV export, 7-year retention.
+4. Team-admin UI: two-step add-seat flow with prorated preview.
+
+## SLOs
+
+- **Add-seat API p95 latency**: 400ms (incl. tax computation).
+- **Mid-month invoice line generation**: <60min from event.
+- **Audit ledger durability**: 11 nines.
+
+## Open questions
+
+- Which tax engine handles CA / NY / UK mid-month rules — Finance.
+- Where the audit ledger lives (existing data lake vs new WORM tier) — Platform.
+- Failure semantics for declined-card retry — Payments.
+
+## Decision needed
+
+Approve to enter design-and-build. Target sprint zero: 2026-05-26.`,
+        ko: `# PRD — 헤일로 셀프서브 시트 확장
+
+- **담당**: 엔지니어링 — 다니엘 김
+- **연결**: 상품화 발의서 (HALO-7421)
+- **상태**: 초안
+
+## 목표
+
+월 중간 안분 청구와 append-only 감사 원장을 갖춘 셀프서브 시트 추가/제거를
+2026 Q3에 출시.
+
+## 범위 제외
+
+- 셀프서브 플랜 티어 변경 (v1.1로 연기).
+- 다통화 청구 (v1.2로 연기).
+
+## 기능 범위
+
+1. 시트 관리 API: 재시도 안전 토큰 포함 멱등 추가/제거.
+2. 안분 엔진: 1시간 이내 청구 라인 생성, 재실행 가능.
+3. 감사 원장: append-only WORM 스타일 저장, CSV 내보내기, 7년 보존.
+4. 팀-관리자 UI: 안분 미리보기가 있는 2단계 시트 추가 흐름.
+
+## SLO
+
+- **시트 추가 API p95 지연**: 400ms (세무 계산 포함).
+- **월 중간 청구 라인 생성**: 이벤트로부터 60분 이내.
+- **감사 원장 내구성**: 11 나인.
+
+## 미해결 질문
+
+- CA/NY/UK 월 중간 규칙을 처리할 세무 엔진 — 재무.
+- 감사 원장 위치 (기존 데이터 레이크 vs 신규 WORM 계층) — 플랫폼.
+- 카드 거절 재시도의 실패 시맨틱 — 결제.
+
+## 필요한 의사결정
+
+설계·구축 진입 승인. 스프린트 제로 목표: 2026-05-26.`,
+      },
+      "design-brief.md": {
+        label: { en: "Design Brief", ko: "디자인 발의서" },
+        role: "design",
+        en: `# Design Brief — Halo Self-serve Seat Expansion
+
+- **Owner**: Design — Sara Vega
+- **Linked**: productization-proposal.md, software-prd.md
+- **Status**: draft
+
+## Audience
+
+- **Primary**: team-admins — typically a single person per Halo customer.
+- **Secondary**: finance reviewers reconciling invoices monthly.
+- **Tertiary**: end users impacted when their seat is added or removed.
+
+## Design principles
+
+1. **Prorated cost is visible before the click.** No surprise post-submit charges.
+2. **Two steps, not a wizard.** Pick count → confirm. No guided tour.
+3. **Failure is a first-class state.** Declined cards must offer a clear retry path.
+
+## Surfaces
+
+| Surface | Audience | v1 status |
+|---|---|---|
+| Team-admin console | team-admin | required |
+| Email receipt with prorated line | team-admin + finance | required |
+| Audit ledger CSV download | finance | required |
+| Marketing landing page | sales motion | required |
+
+## Open design questions
+
+- One-page flow vs slide-over modal for confirm.
+- Whether to expose the audit ledger inline in the console.
+- Empty-state copy for teams with no historical seat changes.
+
+## Next
+
+Two-week design sprint kicking off 2026-05-19. Deliverables: add-seat IA, mobile
+breakpoint, failure-state spec, audit-ledger viewer.`,
+        ko: `# 디자인 발의서 — 헤일로 셀프서브 시트 확장
+
+- **담당**: 디자인 — 사라 베가
+- **연결**: 상품화 발의서, PRD
+- **상태**: 초안
+
+## 사용자
+
+- **주**: 팀-관리자 — 헤일로 고객당 보통 1명.
+- **부**: 매월 청구서를 정합하는 재무 리뷰어.
+- **간헐**: 시트가 추가/제거될 때 영향받는 최종 사용자.
+
+## 디자인 원칙
+
+1. **안분 금액은 클릭 전에 보인다.** 제출 후 깜짝 청구 없음.
+2. **2단계, 위저드 아님.** 수량 선택 → 확인. 가이드 투어 없음.
+3. **실패는 1급 상태.** 카드 거절 시 명확한 재시도 경로 필수.
+
+## 표면
+
+| 표면 | 사용자 | v1 상태 |
+|---|---|---|
+| 팀-관리자 콘솔 | 팀-관리자 | 필수 |
+| 안분 라인이 포함된 이메일 영수증 | 팀-관리자 + 재무 | 필수 |
+| 감사 원장 CSV 다운로드 | 재무 | 필수 |
+| 마케팅 랜딩 페이지 | 영업 활동 | 필수 |
+
+## 미해결 디자인 질문
+
+- 확인 단계: 단일 페이지 vs 슬라이드오버 모달.
+- 감사 원장을 콘솔 인라인으로 노출할지 여부.
+- 시트 변경 이력이 없는 팀의 빈 상태 카피.
+
+## 다음
+
+2026-05-19 시작 2주 디자인 스프린트. 산출물: 시트 추가 IA, 모바일 브레이크포인트,
+실패 상태 명세, 감사 원장 뷰어.`,
+      },
+    },
+  },
+};
+
+const DEFAULT_SCENARIO_ID = "acme-bank";
+
+function setActiveScenario(id) {
+  const s = SCENARIOS[id] ?? SCENARIOS[DEFAULT_SCENARIO_ID];
+  SCENARIO = { title: s.title, customer: s.customer, initialNeed: s.initialNeed };
+  REVIEWERS = s.reviewers;
+  REVIEWS = s.reviews;
+  ARTIFACTS = s.artifacts;
+}

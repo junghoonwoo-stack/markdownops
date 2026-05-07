@@ -8,6 +8,7 @@ const initialState = () => ({
   lang: "en",
   mode: "recorded",
   apiKey: "",
+  scenarioId: DEFAULT_SCENARIO_ID,
   capturedNeed: null,
   artifacts: [],
   activeArtifactIdx: -1,
@@ -19,6 +20,8 @@ const initialState = () => ({
 });
 
 let state = loadState() || initialState();
+if (!state.scenarioId) state.scenarioId = DEFAULT_SCENARIO_ID;
+setActiveScenario(state.scenarioId);
 
 function loadState() {
   try {
@@ -35,8 +38,21 @@ function saveState() {
 }
 function resetState() {
   if (!confirm("Reset the demo to step 1? This clears decisions and live drafts.")) return;
+  const lang = state.lang;
+  const scenarioId = state.scenarioId;
   localStorage.removeItem(STORAGE_KEY);
   state = initialState();
+  state.lang = lang;
+  state.scenarioId = scenarioId;
+  setActiveScenario(state.scenarioId);
+  render();
+}
+
+function changeScenario(id) {
+  if (!SCENARIOS[id]) return;
+  state = initialState();
+  state.scenarioId = id;
+  setActiveScenario(id);
   render();
 }
 
@@ -394,6 +410,17 @@ function renderHeader() {
     state.mode === "recorded" ? "Mode: Recorded" : "Mode: Live API";
   document.getElementById("mode-toggle").classList.toggle("bg-amber-50", state.mode === "live");
   document.getElementById("mode-toggle").classList.toggle("border-amber-300", state.mode === "live");
+
+  const sel = document.getElementById("scenario-select");
+  if (sel && sel.dataset.scenario !== state.scenarioId) {
+    sel.innerHTML = Object.entries(SCENARIOS)
+      .map(
+        ([id, s]) =>
+          `<option value="${esc(id)}" ${id === state.scenarioId ? "selected" : ""}>${esc(t(s.label))}</option>`
+      )
+      .join("");
+    sel.dataset.scenario = state.scenarioId;
+  }
 }
 
 function renderActionPanel() {
@@ -527,6 +554,12 @@ window.addEventListener("DOMContentLoaded", () => {
     render();
   });
   document.getElementById("reset-btn").addEventListener("click", resetState);
+  const scenarioSelect = document.getElementById("scenario-select");
+  if (scenarioSelect) {
+    scenarioSelect.addEventListener("change", (e) => {
+      changeScenario(e.target.value);
+    });
+  }
   document.querySelectorAll(".tab-btn").forEach((b) => {
     b.addEventListener("click", () => {
       state.paneTab = b.dataset.tab;
