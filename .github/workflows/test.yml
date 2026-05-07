@@ -1,0 +1,35 @@
+name: Test MCP servers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mcp-servers/**"
+      - ".github/workflows/test.yml"
+  pull_request:
+    paths:
+      - "mcp-servers/**"
+      - ".github/workflows/test.yml"
+
+jobs:
+  github-mcp:
+    name: mcp-servers/github
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mcp-servers/github
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install
+        run: npm install --no-audit --no-fund
+
+      - name: Type-check and build
+        run: npm run build
+
+      - name: Test
+        run: npm test
