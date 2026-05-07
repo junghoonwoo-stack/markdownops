@@ -1,0 +1,23 @@
+{
+  "name": "@markdownops/evals",
+  "version": "0.1.0",
+  "description": "Deterministic structural checks plus optional LLM-judge for MarkdownOps agent outputs.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "eval": "tsx src/cli.ts",
+    "eval:built": "node dist/cli.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

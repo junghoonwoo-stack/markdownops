@@ -1,14 +1,16 @@
-name: Test MCP servers
+name: Tests
 
 on:
   push:
     branches: [main]
     paths:
       - "mcp-servers/**"
+      - "evals/**"
       - ".github/workflows/test.yml"
   pull_request:
     paths:
       - "mcp-servers/**"
+      - "evals/**"
       - ".github/workflows/test.yml"
 
 jobs:
@@ -22,6 +24,28 @@ jobs:
     defaults:
       run:
         working-directory: mcp-servers/${{ matrix.server }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install
+        run: npm install --no-audit --no-fund
+
+      - name: Type-check and build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+  evals:
+    name: evals
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: evals
     steps:
       - uses: actions/checkout@v4
 
