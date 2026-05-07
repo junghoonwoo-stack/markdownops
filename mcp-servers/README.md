@@ -24,7 +24,7 @@ See [../runners/mcp.md](../runners/mcp.md) for the contract details.
 |---|---|---|
 | GitHub Issues | ✅ available | [github/](github/) |
 | GitLab Issues | ✅ available | [gitlab/](gitlab/) |
-| Jira | 🚧 planned | `jira/` |
+| Jira Cloud | ✅ available | [jira/](jira/) |
 | Linear | 🚧 planned | `linear/` |
 | Asana | 🚧 planned | `asana/` |
 | Notion | 🚧 planned | `notion/` |
@@ -90,7 +90,7 @@ MarkdownOps용 협업 레이어 커넥터, Model Context Protocol 서버로 노�
 |---|---|---|
 | GitHub Issues | ✅ 사용 가능 | [github/](github/) |
 | GitLab Issues | ✅ 사용 가능 | [gitlab/](gitlab/) |
-| Jira | 🚧 예정 | `jira/` |
+| Jira Cloud | ✅ 사용 가능 | [jira/](jira/) |
 | Linear | 🚧 예정 | `linear/` |
 | Asana | 🚧 예정 | `asana/` |
 | Notion | 🚧 예정 | `notion/` |

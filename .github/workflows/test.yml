@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        server: [github, gitlab]
+        server: [github, gitlab, jira]
     defaults:
       run:
         working-directory: mcp-servers/${{ matrix.server }}
