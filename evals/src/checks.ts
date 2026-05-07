@@ -6,10 +6,18 @@ export interface CheckResult {
   details?: string;
 }
 
-const KOREAN_MARKER = /(##\s*한국어|^# 영업요구조건서|^# 상품화 발의서|^# 디자인 발의서|^# 의사결정|^# 회의록|^# PRD —)/m;
+// An artifact is treated as bilingual when it carries the `## 한국어`
+// separator that templates and agents use, OR when its first heading contains
+// a Hangul character (single-language Korean artifacts). Title patterns shared
+// between English and Korean (e.g. `# PRD —`) are intentionally not used here
+// — they would produce false positives on English-only artifacts.
+const HANGUL = /[가-힯]/;
 
 export function hasKoreanSection(output: string): boolean {
-  return KOREAN_MARKER.test(output);
+  if (/^##\s*한국어\s*$/m.test(output)) return true;
+  const firstHeading = output.match(/^#\s+(.+)$/m);
+  if (firstHeading && HANGUL.test(firstHeading[1])) return true;
+  return false;
 }
 
 export function checkMetadata(output: string, spec: ArtifactSpec): CheckResult {
