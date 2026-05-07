@@ -2,7 +2,8 @@
 
 > A collaboration pattern for AI-native organizations.
 
-**Live demo:** https://junghoonwoo-stack.github.io/markdownops/demo/
+- **Landing page:** https://junghoonwoo-stack.github.io/markdownops/
+- **Working demo:** https://junghoonwoo-stack.github.io/markdownops/demo/
 
 MarkdownOps is a pattern for moving organizational work from meeting-heavy,
 human-only documents into Markdown-centered, agent-readable workflows.
@@ -192,7 +193,8 @@ demo/
 
 > AI-native 조직 협업을 위한 패턴.
 
-**라이브 데모:** https://junghoonwoo-stack.github.io/markdownops/demo/
+- **소개 페이지:** https://junghoonwoo-stack.github.io/markdownops/
+- **작동 데모:** https://junghoonwoo-stack.github.io/markdownops/demo/
 
 MarkdownOps는 회의 중심, 사람 전용 문서 중심의 조직 업무를 Markdown
 중심의 AI agent-readable workflow로 바꾸는 협업 패턴이다.
